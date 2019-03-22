@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
@@ -15,6 +16,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if( Auth::check() && Auth::user()->role->id == 1){
+            return $next($request);
+        }else{
+            return redirect()->route('login');
+        }
+        
     }
 }
