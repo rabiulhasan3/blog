@@ -60,7 +60,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -71,7 +71,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('admin.tag.edit',compact('tag'));
     }
 
     /**
@@ -83,7 +84,12 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->name = trim($request->input('name'));
+        $tag->slug = str_slug(trim($request->input('name')));
+        $tag->update();
+        Toastr::success('Tag Update Successfully :)','success');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
@@ -94,6 +100,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::find($id)->delete();
+        Toastr::success('Tag Delete Successfully :)','success');
+        return redirect()->back();
     }
 }
