@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Add New Tag
+                        Edit Tag
                     </h2>
                 </div>
                 <div class="body">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <a href="{{ route('admin.tag.index') }}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                     </form>
                 </div>
             </div>

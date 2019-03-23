@@ -16,21 +16,25 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Add New Tag
+                        Edit Category
                     </h2>
                 </div>
                 <div class="body">
-                    <form action="{{ route('admin.tag.update',$tag->id)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.category.update',$category->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group form-float">
                             <div class="form-line">
-                            <input type="text" id="email_address" autocomplete="off" class="form-control" value="{{ $tag->name}}" name="name">
-                                <label class="form-label">Tag Name</label>
+                                <input type="text" id="email_address" autocomplete="off" class="form-control" name="name" value="{{ $category->name }}">
+                                <label class="form-label">Category Name</label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Category Image</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                        </div>
                         <a href="{{ route('admin.tag.index') }}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                     </form>
                 </div>
             </div>

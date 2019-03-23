@@ -56,7 +56,7 @@
                                             <button class="btn btn-danger waves-effect" type="button" onclick="deleteCategory({{ $category->id }})">
                                                     <i class="material-icons">delete</i>
                                                 </button>
-                                                <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.category.destroy',$category->id) }}" method="POST" style="display: none;">
+                                                <form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy',$category->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
