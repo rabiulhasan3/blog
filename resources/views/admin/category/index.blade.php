@@ -33,8 +33,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
                                     <th>Image</th>
+                                    <th>Post Count</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -45,8 +45,8 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name}}</td>
-                                        <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->image }}</td>
+                                        <td>{{ str_limit($category->image,15) }}</td>
+                                        <td>{{ $category->posts->count() }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td class="text-center">
