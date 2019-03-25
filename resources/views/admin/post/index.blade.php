@@ -67,6 +67,7 @@
                                         </td>
                                         <td>{{ $post->created_at->diffForHumans() }}</td>
                                         <td class="text-center">
+                                            
                                             <a href="{{ route('admin.post.edit',$post->id) }}" class="btn btn-primary btn-sm waves-effect">
                                                 <i class="material-icons">edit</i>
                                             </a>

@@ -106,7 +106,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        
     }
 
     /**
@@ -117,7 +117,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.post.edit',compact('categories','tags','post'));
     }
 
     /**
@@ -129,7 +131,61 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request,[
+            'title' => 'required',
+            'image' => 'mimes:jpeg,bmp,png,jpg',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required',
+        ]);
+
+        $image = $request->file('image');
+        $slug = str_slug(trim($request->input('title')));
+
+        if(isset($image)){
+
+            //  make unique name for image
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            //  check category dir is exists
+            if (!Storage::disk('public')->exists('post'))
+            {
+                Storage::disk('public')->makeDirectory('post');
+            }
+
+            //            delete old post image
+            if(Storage::disk('public')->exists('post/'.$post->image))
+            {
+                Storage::disk('public')->delete('post/'.$post->image);
+            }
+
+            //   resize image for category and upload
+            $postImage = Image::make($image)->resize(1600,1066)->stream();
+            Storage::disk('public')->put('post/'.$imagename,$postImage);
+        }else{
+            $imagename = $post->image;
+        }
+
+        $post->title = trim($request->input('title'));
+        $post->user_id = Auth::user()->id;
+        $post->slug = $slug;
+        $post->image = $imagename;
+        $post->body = trim($request->input('body'));
+        if(isset($request->status))
+        {
+            $post->status = true;
+        }else {
+            $post->status = false;
+        }
+        $post->is_approved = true;
+        $post->save();
+
+        $post->categories()->sync($request->categories);
+        $post->tags()->sync($request->tags);
+
+        Toastr::success('Post Successfully Updated :)','Success');
+        return redirect()->route('admin.post.index');
     }
 
     /**
