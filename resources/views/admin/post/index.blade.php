@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title','Category')
+@section('title','Post')
 
 @push('css')
      <!-- JQuery DataTable Css -->
@@ -67,7 +67,9 @@
                                         </td>
                                         <td>{{ $post->created_at->diffForHumans() }}</td>
                                         <td class="text-center">
-                                            
+                                            <a href="{{ route('admin.post.show',$post->id) }}" class="btn btn-success btn-sm waves-effect">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
                                             <a href="{{ route('admin.post.edit',$post->id) }}" class="btn btn-primary btn-sm waves-effect">
                                                 <i class="material-icons">edit</i>
                                             </a>
