@@ -9,17 +9,13 @@
 
 @section('content')
 <div class="container-fluid">
-      <a href="{{ route('admin.post.index') }}" class="btn btn-danger waves-effect">BACK</a>
+      <a href="{{ route('author.post.index') }}" class="btn btn-danger waves-effect">BACK</a>
     
    @if($post->is_approved == false)
-            <button type="button" class="btn btn-success waves-effect pull-right" onclick="approvePost({{ $post->id }})">
+            <button type="button" class="btn btn-danger waves-effect pull-right" ">
                 <i class="material-icons">done</i>
                 <span>Approve</span>
             </button>
-            <form method="post" action="{{ route('admin.post.approve',$post->id) }}" id="approval-form" style="display: none">
-                @csrf
-                @method('PUT')
-            </form>
         @else
             <button type="button" class="btn btn-success pull-right" disabled>
                 <i class="material-icons">done</i>
