@@ -12,6 +12,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\AuthorPostApproved;
 
 class PostController extends Controller
 {
@@ -240,6 +242,9 @@ class PostController extends Controller
         {
             $post->is_approved = true;
             $post->save();
+
+            $post->user->notify(new AuthorPostApproved($post));
+            
             Toastr::success('Post Successfully Approved :)','Success');
         } else {
             Toastr::info('This Post is already approved','Info');
