@@ -22,7 +22,8 @@ Route::post('scubscribe','SubscriberController@store')->name('subscribe.store');
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin'],'as'=>'admin.'],function(){
 
 	Route::get('settings','SettingController@index')->name('settings');
-	Route::put('profile-update','SettingController@updateProfile')->name('update.profile');
+	Route::put('profile-update','SettingController@updateProfile')->name('profile.update');
+	Route::put('password-update','SettingController@updatePassword')->name('password.update');
 
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
 	Route::resource('tag','TagController');
