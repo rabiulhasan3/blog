@@ -42,6 +42,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admi
 //Author All Route Here
 Route::group(['prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author'],'as'=>'author.'],function(){
 
+	Route::get('settings','SettingController@index')->name('settings');
+	Route::put('profile-update','SettingController@updateProfile')->name('profile.update');
+	Route::put('password-update','SettingController@updatePassword')->name('password.update');
+
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
 	Route::resource('post','PostController');
 
