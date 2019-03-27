@@ -21,6 +21,9 @@ Route::post('scubscribe','SubscriberController@store')->name('subscribe.store');
 // Admin All Route Here
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin'],'as'=>'admin.'],function(){
 
+	Route::get('settings','SettingController@index')->name('settings');
+	Route::put('profile-update','SettingController@updateProfile')->name('update.profile');
+
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
 	Route::resource('tag','TagController');
 	Route::resource('category','CategoryController');
