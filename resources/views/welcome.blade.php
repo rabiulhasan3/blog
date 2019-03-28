@@ -9,7 +9,7 @@
         .favourite_post{
             color: blue;
         }
-        
+
     </style>
 @endpush
 
@@ -64,7 +64,7 @@
                                 <div class="blog-info">
 
                                     <h4 class="title">
-                                        <a href="#">
+                                        <a href="{{ route('post.details',$post->slug) }}">
                                             <b>
                                                 {{ $post->title }}
                                             </b>
