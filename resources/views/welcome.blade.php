@@ -4,6 +4,13 @@
     <link href="{{ asset('assets/frontend/css/home/styles.css')}}" rel="stylesheet">
 
     <link href="{{ asset('assets/frontend/css/home/responsive.css')}}" rel="stylesheet">
+
+    <style>
+        .favourite_post{
+            color: blue;
+        }
+        
+    </style>
 @endpush
 
 @section('content')
@@ -65,9 +72,30 @@
                                     </h4>
 
                                     <ul class="post-footer">
-                                        <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                        <li>
+                                            @guest
+                                                <a href="javascript:void(0)" onclick="toastr.info('To add favourite list. You need log in first :)','info',{
+                                                    closeButton : true,
+                                                    progressBar : true,
+                                                })">
+                                                    <i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}
+                                                </a>
+                                            @else
+                                                <a href="javascript:void(0)" onclick="document.getElementById('favourite-form-{{ $post->id }}').submit()"
+                                                    class="{{ !Auth::user()->favorite_posts->where('pivot.post_id',$post->id)->count() == 0 ? 'favourite_post' : '' }}"
+                                                    >
+                                                    <i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}
+                                                </a>
+
+                                                <form id="favourite-form-{{ $post->id }}" action="{{ route( 'post.favourite',$post->id ) }}" style="display: none" method="post">
+                                                    @csrf
+                                                    
+                                                </form>
+                                            @endguest
+                                            
+                                        </li>
                                         <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                        <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                        <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                                     </ul>
 
                                 </div><!-- blog-info -->
