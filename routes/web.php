@@ -34,6 +34,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admi
 	Route::resource('category','CategoryController');
 	Route::resource('post','PostController');
 
+	Route::get('favourite','FavouriteController@index')->name('favourite.index');
+
 	Route::get('pending/post','PostController@pending')->name('post.pending');
 	Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');
 
@@ -52,5 +54,7 @@ Route::group(['prefix'=>'author','namespace'=>'Author','middleware'=>['auth','au
 
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
 	Route::resource('post','PostController');
+
+	Route::get('favourite','FavouriteController@index')->name('favourite.index');
 
 });
