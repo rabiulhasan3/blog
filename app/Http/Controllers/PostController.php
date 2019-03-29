@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 class PostController extends Controller
 {
 	public function index(){
-		$posts = Post::latest()->paginate(1);
+		$posts = Post::latest()->paginate(6);
 		return view('posts',compact('posts'));
 	}
 

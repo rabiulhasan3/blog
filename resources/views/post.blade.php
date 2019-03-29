@@ -206,19 +206,22 @@
 
 					<h4><b>COMMENTS({{ $post->comments->count() }})</b></h4>
 
+					@if( $post->comments->count() > 0 )
+
 					<div class="commnets-area">
 
+						@foreach( $post->comments as $comment )
 						<div class="comment">
 
 							<div class="post-info">
 
 								<div class="left-area">
-									<a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+									<a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$comment->user->image)}}" alt="Profile Image"></a>
 								</div>
 
 								<div class="middle-area">
-									<a class="name" href="#"><b>Katy Liu</b></a>
-									<h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+									<a class="name" href="#"><b>{{ $comment->user->name }}</b></a>
+									<h6 class="date">{{ $comment->created_at->diffForHumans()}}</h6>
 								</div>
 
 								<div class="right-area">
@@ -227,70 +230,20 @@
 
 							</div><!-- post-info -->
 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-								ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-								Ut enim ad minim veniam</p>
+							<p>{{ $comment->comment }}</p>
 
 						</div>
-
-						<div class="comment">
-							<h5 class="reply-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-							<div class="post-info">
-
-								<div class="left-area">
-									<a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-								</div>
-
-								<div class="middle-area">
-									<a class="name" href="#"><b>Katy Liu</b></a>
-									<h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-								</div>
-
-								<div class="right-area">
-									<h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-								</div>
-
-							</div><!-- post-info -->
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-								ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-								Ut enim ad minim veniam</p>
-
-						</div>
+						@endforeach
 
 					</div><!-- commnets-area -->
 
-					<div class="commnets-area ">
+						
 
-						<div class="comment">
+					@else
 
-							<div class="post-info">
+						<a class="more-comment-btn" href="#"><b>No Comment Found</a>
 
-								<div class="left-area">
-									<a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-								</div>
-
-								<div class="middle-area">
-									<a class="name" href="#"><b>Katy Liu</b></a>
-									<h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-								</div>
-
-								<div class="right-area">
-									<h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-								</div>
-
-							</div><!-- post-info -->
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-								ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-								Ut enim ad minim veniam</p>
-
-						</div>
-
-					</div><!-- commnets-area -->
-
-					<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+					@endif
 
 				</div><!-- col-lg-8 col-md-12 -->
 
