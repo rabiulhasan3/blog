@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Category;
 use App\Tag; 
+use App\Post;
 
 class Post extends Model
 {
@@ -24,5 +25,9 @@ class Post extends Model
     public function favorite_to_users()
     {
         return $this->belongsToMany('App\User')->withTimestamps();
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }
