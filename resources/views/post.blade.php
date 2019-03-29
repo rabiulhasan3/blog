@@ -185,31 +185,26 @@
 
 				<div class="col-lg-8 col-md-12">
 					<div class="comment-form">
-						<form method="post">
-							<div class="row">
+						@guest
+							<p>For post a new comment. You need to login first. <a href="{{ route('login') }}">login</a></p>
+						@else
+							<form action="{{ route('comment.store',$post->id)}}" method="post">
+								@csrf
+								<div class="row">
+									<div class="col-sm-12">
+										<textarea name="comment" required="required" rows="2" class="text-area-messge form-control"
+											placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+									</div><!-- col-sm-12 -->
+									<div class="col-sm-12">
+										<button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+									</div><!-- col-sm-12 -->
 
-								<div class="col-sm-6">
-									<input type="text" aria-required="true" name="contact-form-name" class="form-control"
-										placeholder="Enter your name" aria-invalid="true" required >
-								</div><!-- col-sm-6 -->
-								<div class="col-sm-6">
-									<input type="email" aria-required="true" name="contact-form-email" class="form-control"
-										placeholder="Enter your email" aria-invalid="true" required>
-								</div><!-- col-sm-6 -->
-
-								<div class="col-sm-12">
-									<textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
-										placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
-								</div><!-- col-sm-12 -->
-								<div class="col-sm-12">
-									<button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
-								</div><!-- col-sm-12 -->
-
-							</div><!-- row -->
-						</form>
+								</div><!-- row -->
+							</form>
+						@endguest
 					</div><!-- comment-form -->
 
-					<h4><b>COMMENTS(12)</b></h4>
+					<h4><b>COMMENTS({{ $post->comments->count() }})</b></h4>
 
 					<div class="commnets-area">
 

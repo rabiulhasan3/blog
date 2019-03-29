@@ -23,6 +23,7 @@ Route::get('post/{slug}','PostController@details')->name('post.details');
 
 Route::group(['middleware'=>['auth']],function(){
 	Route::post('favourite/{post}/add','FavouriteController@add')->name('post.favourite');
+	Route::post('comment/{post_id}','CommentController@store')->name('comment.store');
 });
 
 
