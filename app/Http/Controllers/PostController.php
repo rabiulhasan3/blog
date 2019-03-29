@@ -4,12 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
+	public function index(){
+		$posts = Post::latest()->paginate(1);
+		return view('posts',compact('posts'));
+	}
+
     public function details($slug){
     	$post = Post::where('slug',$slug)->first();
-    	$randomPosts = Post::all()->random(2);
+
+    	$blogKey = 'blog_'.$post->id;
+
+    	if(!Session::has($blogKey)){
+    		$post->increment('view_count');
+    		Session::put($blogKey,1);
+    	}
+    	$randomPosts = Post::all()->random(3);
     	return view('post',compact('post','randomPosts'));
     }
 }
