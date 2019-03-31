@@ -1,59 +1,34 @@
 @extends('layouts.frontend.app')
 
 @push('css')
-    <link href="{{ asset('assets/frontend/css/home/styles.css')}}" rel="stylesheet">
 
-    <link href="{{ asset('assets/frontend/css/home/responsive.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/category/css/styles.css')}}" rel="stylesheet">
+
+	<link href="{{ asset('assets/frontend/css/category/css/responsive.css')}}" rel="stylesheet">
 
     <style>
-        .favourite_post{
+        .favorite_posts{
             color: blue;
         }
-
+        .slider {
+            background-image: url({{ Storage::disk('public')->url('category/'.$category->image) }})!important; 
+        }
     </style>
 @endpush
 
 @section('content')
-    <div class="main-slider">
-        <div class="swiper-container position-static" data-slide-effect="slide" data-autoheight="false"
-            data-swiper-speed="500" data-swiper-autoplay="10000" data-swiper-margin="0" data-swiper-slides-per-view="4"
-            data-swiper-breakpoints="true" data-swiper-loop="true" >
-            <div class="swiper-wrapper">
+		<div class="slider display-table center-text">
+			<h1 class="title display-table-cell"><b> {{ strtoupper($category->name) }} POSTS</b></h1>
+		</div><!-- slider -->
 
-                @foreach( $categories as $category )
-                <div class="swiper-slide">
-                        <a class="slider-category" href="{{ route('category.posts',$category->slug)  }}">
-                            <div class="blog-image"><img src="{{ Storage::disk('public')->url('category/slider/'.$category->image) }}" alt="Blog Image"></div>
-    
-                            <div class="category">
-                                <div class="display-table center-text">
-                                    <div class="display-table-cell">
-                                        <h3><b>{{ $category->name }}</b></h3>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </a>
-                    </div><!-- swiper-slide -->
-                @endforeach
+	<section class="blog-area section">
+		<div class="container">
 
-              
+			<div class="row">
 
-
-
-            </div><!-- swiper-wrapper -->
-
-        </div><!-- swiper-container -->
-
-    </div><!-- slider -->
-
-    <section class="blog-area section">
-        <div class="container">
-
-            <div class="row">
-
-                @foreach( $posts as $post)
-                    <div class="col-lg-4 col-md-6">
+                @if($category->posts->count() > 0 )
+				@foreach( $category->posts as $post )
+					<div class="col-lg-4 col-md-6">
                         <div class="card h-100">
                             <div class="single-post post-style-1">
 
@@ -103,12 +78,24 @@
                         </div><!-- card -->
                     </div><!-- col-lg-4 col-md-6 -->
                 @endforeach
+                @else
 
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="single-post post-style-1">
+                            <div class="blog-info">
+                                <h4 class="title">
+                                    <strong>Sorry, No post found :(</strong>
+                                </h4>
+                            </div><!-- blog-info -->
+                        </div><!-- single-post -->
+                    </div><!-- card -->
+                </div><!-- col-lg-4 col-md-6 -->
+                @endif
+			</div><!-- row -->
 
-            </div><!-- row -->
+			{{-- <b>{{ $posts->links() }}</b> --}}
 
-            <a class="load-more-btn" href="{{ route('post.index') }}"><b>LOAD MORE</b></a>
-
-        </div><!-- container -->
-    </section><!-- section -->
+		</div><!-- container -->
+	</section><!-- section -->
 @endsection
