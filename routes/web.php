@@ -58,6 +58,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admi
 	Route::get('subscriber','SubscriberController@index')->name('subscriber.index');
 	Route::delete('subscriber/{id}','SubscriberController@destroy')->name('subscriber.destroy');
 
+	Route::get('authors','AuthorController@index')->name('author.index');
+	Route::delete('author/{id}','AuthorController@destroy')->name('author.destroy');
+
 });
 
 

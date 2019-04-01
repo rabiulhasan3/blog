@@ -80,8 +80,15 @@
                                 <span>Subscriber</span>
                             </a>
                         </li>
+                        <li class="{{ Request::is('admin/authors')? 'active' : ''}}">
+                            <a href="{{ route('admin.author.index')}}">
+                                <i class="material-icons">account_circle</i>
+                                <span>Author</span>
+                            </a>
+                        </li>
 
                         <li class="header">System</li>
+
                         <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings') }}">
                                 <i class="material-icons">settings</i>
