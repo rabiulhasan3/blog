@@ -24,6 +24,8 @@ Route::get('post/{slug}','PostController@details')->name('post.details');
 Route::get('category/{slug}','PostController@postByCategory')->name('category.posts');
 Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
 
+Route::get('profile/{username}','AuthorController@profile')->name('author.profile');
+
 Route::get('search','SearchController@search')->name('search');
 
 Route::group(['middleware'=>['auth']],function(){

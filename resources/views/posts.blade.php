@@ -33,7 +33,7 @@
 
                                 <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}"></div>
 
-                            <a class="avatar" href="#"><img src="https://playjoor.com/assets/avatar/patrick.png" alt="{{ $post->user->name }}"></a>
+                            <a class="avatar" href="{{ route('author.profile',$post->user->username) }}"><img src="https://playjoor.com/assets/avatar/patrick.png" alt="{{ $post->user->name }}"></a>
 
                                 <div class="blog-info">
 
