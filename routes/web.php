@@ -29,6 +29,11 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::post('comment/{post_id}','CommentController@store')->name('comment.store');
 });
 
+View::composer('layouts.frontend.partial.footer',function($view){
+	$categories = App\Category::all();
+	$view->with('categories',$categories);
+});
+
 
 
 // Admin All Route Here

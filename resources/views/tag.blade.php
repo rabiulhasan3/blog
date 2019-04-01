@@ -18,7 +18,7 @@
 
 @section('content')
 		<div class="slider display-table center-text">
-			<h1 class="title display-table-cell"><b> {{ strtoupper($tag->name) }} POSTS</b></h1>
+			<h1 class="title display-table-cell"><b> {{ strtoupper($tag->name) }} TAGS  POSTS</b></h1>
 		</div><!-- slider -->
 
 	<section class="blog-area section">
@@ -27,7 +27,7 @@
 			<div class="row">
 
                 @if($tag->posts->count() > 0 )
-				@foreach( $tag->posts as $post )
+				@foreach( $posts as $post )
 					<div class="col-lg-4 col-md-6">
                         <div class="card h-100">
                             <div class="single-post post-style-1">
